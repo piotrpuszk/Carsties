@@ -9,6 +9,8 @@ type State = {
   searchValue: string;
   filterBy: string;
   orderBy: string;
+  seller?: string;
+  winner?: string;
 };
 
 type Actions = {
@@ -25,6 +27,8 @@ const initialState: State = {
   searchValue: "",
   filterBy: "live",
   orderBy: "make",
+  seller: undefined,
+  winner: undefined,
 };
 
 export const useParamsStore = createWithEqualityFn<State & Actions>()(

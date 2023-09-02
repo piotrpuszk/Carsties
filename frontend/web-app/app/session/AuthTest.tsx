@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { UpdateAuctionTest } from '../actions/auctionActions';
-import { Button } from 'flowbite-react';
+import React, { useState } from "react";
+import { updateAuctionTest } from "../actions/auctionActions";
+import { Button } from "flowbite-react";
 
 export default function AuthTest() {
   const [loading, setLoading] = useState(false);
@@ -11,19 +11,17 @@ export default function AuthTest() {
   function doUpdate() {
     setResult(undefined);
     setLoading(true);
-    UpdateAuctionTest()
-    .then(res => setResult(res))
-    .finally(() => setLoading(false));
+    updateAuctionTest()
+      .then((res) => setResult(res))
+      .finally(() => setLoading(false));
   }
 
   return (
-    <div className='flex items-center gap-4'>
+    <div className="flex items-center gap-4">
       <Button outline isProcessing={loading} onClick={doUpdate}>
         Test auth
       </Button>
-      <div>
-        {JSON.stringify(result, null, 2)}
-      </div>
+      <div>{JSON.stringify(result, null, 2)}</div>
     </div>
-  )
+  );
 }
