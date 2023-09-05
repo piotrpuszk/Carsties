@@ -1,6 +1,6 @@
 "use server";
 
-import { PagedResult, Auction } from "@/types";
+import { PagedResult, Auction, Bid } from "@/types";
 import { fetchWrapper } from "@/lib/fetchWrapper";
 import { FieldValues } from "react-hook-form";
 import { revalidatePath } from "next/cache";
@@ -14,11 +14,14 @@ export async function updateAuctionTest() {
     mileage: Math.floor(Math.random() * 10000) + 1,
   };
 
-  return await fetchWrapper.put('auctions/afbee524-5972-4075-8800-7d1f9d7b0a0c', data);
+  return await fetchWrapper.put(
+    "auctions/afbee524-5972-4075-8800-7d1f9d7b0a0c",
+    data
+  );
 }
 
 export async function createAuction(data: FieldValues) {
-  return await fetchWrapper.post('auctions', data);
+  return await fetchWrapper.post("auctions", data);
 }
 
 export async function getDetailedViewData(id: string): Promise<Auction> {
@@ -33,4 +36,15 @@ export async function updateAuction(data: FieldValues, id: string) {
 
 export async function deleteAuction(id: string) {
   return await fetchWrapper.del(`auctions/${id}`);
+}
+
+export async function getBidsForAuction(id: string): Promise<Bid[]> {
+  return await fetchWrapper.get(`bids/${id}`);
+}
+
+export async function placeBidForAuction(auctionId: string, amount: number) {
+  return await fetchWrapper.post(
+    `bids?auctionId=${auctionId}&amount=${amount}`,
+    {}
+  );
 }
