@@ -28,7 +28,7 @@ builder.Services.AddMassTransit(x =>
 
   x.UsingRabbitMq((context, config) =>
   {
-    config.Host(builder.Configuration["RabbitMq:Host"], "/", host => 
+    config.Host(builder.Configuration["RabbitMq:Host"], "/", host =>  
     {
       host.Username(builder.Configuration.GetValue("RabbitMq:Username", "guest"));
       host.Password(builder.Configuration.GetValue("RabbitMq:Password", "guest"));
@@ -46,6 +46,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   options.TokenValidationParameters.NameClaimType = "username";
 });
 builder.Services.AddGrpc();
+
+builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
 
 var app = builder.Build();
 
@@ -67,3 +69,5 @@ catch (Exception e)
 }
 
 app.Run();
+
+public partial class Program {}
